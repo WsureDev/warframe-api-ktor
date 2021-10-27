@@ -11,7 +11,7 @@ data class Riven(
     val type: RivenType,
     val rank: Int,
     val modulus: Double,
-)
+):Words
 
 @Serializable
 enum class RivenType {

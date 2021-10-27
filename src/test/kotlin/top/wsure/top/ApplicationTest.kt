@@ -1,6 +1,5 @@
 package top.wsure.top
 
-import io.ktor.html.*
 import io.ktor.http.*
 import kotlin.test.*
 import io.ktor.server.testing.*
@@ -9,11 +8,9 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import top.wsure.top.dto.Dict
-import top.wsure.top.dto.LibEnum
+import top.wsure.top.dto.DictEnum
 import top.wsure.top.plugins.*
 import top.wsure.top.utils.downloadDict
-import kotlin.coroutines.suspendCoroutine
 
 class ApplicationTest {
     @Test
@@ -49,7 +46,7 @@ class ApplicationTest {
 
     @Serializable
     data class TestEnumClass(
-        val lib:LibEnum,
+        val lib:DictEnum,
         val name:String,
     )
 

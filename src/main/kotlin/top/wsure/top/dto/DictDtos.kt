@@ -11,16 +11,8 @@ data class Dict(
 
     val en:String,
 
-){
-    fun getByZh():Pair<String,
-String>{
-        return zh to en
-    }
-    fun getByEn():Pair<String,
-String>{
-        return en to zh
-    }
-}
+):Words
+
 @Serializable
 data class LibItem(
     val id:Long,
@@ -28,7 +20,7 @@ data class LibItem(
     val type:LibType,
     val uniqueName:String,
     val thumb:String,
-)
+):Words
 
 @Serializable
 enum class LibType {
