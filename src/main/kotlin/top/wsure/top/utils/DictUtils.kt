@@ -19,6 +19,6 @@ suspend fun downloadDict():List<Dict>{
         engine {
             proxy = Proxy(Proxy.Type.HTTP, InetSocketAddress("localhost", 7890))
         }
-    }.get("https://raw.githubusercontent.com/Richasy/WFA_Lexicon/WFA5/WF_Dict.json")
+    }.get()
 }
 

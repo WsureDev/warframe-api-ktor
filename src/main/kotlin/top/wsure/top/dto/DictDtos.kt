@@ -1,5 +1,6 @@
 package top.wsure.top.dto
 
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -29,21 +30,38 @@ data class LibItem(
     val thumb:String,
 )
 
+@Serializable
 enum class LibType {
-    Arcanes,
-    Archwing,
-    `Arch-Gun`,
-    `Arch-Melee`,
-    Enemy,
-    Fish,
-    Gear,
-    Melee,
-    Mods,
-    Pets,
-    Primary,
-    Resources,
-    Secondary,
-    Sentinels,
-    Warframes,
-    Relics
+    @SerialName("Arcanes")
+    ARCANES,
+    @SerialName("Archwing")
+    ARCHWING,
+    @SerialName("Arch-Gun")
+    ARCH_GUN,
+    @SerialName("Arch-Melee")
+    ARCH_MELEE,
+    @SerialName("Enemy")
+    ENEMY,
+    @SerialName("Fish")
+    FISH,
+    @SerialName("Gear")
+    GEAR,
+    @SerialName("Melee")
+    MELEE,
+    @SerialName("Mods")
+    MODS,
+    @SerialName("Pets")
+    PETS,
+    @SerialName("Primary")
+    PRIMARY,
+    @SerialName("Resources")
+    RESOURCES,
+    @SerialName("Secondary")
+    SECONDARY,
+    @SerialName("Sentinels")
+    SENTINELS,
+    @SerialName("Warframes")
+    WARFRAMES,
+    @SerialName("Relics")
+    RELICS
 }

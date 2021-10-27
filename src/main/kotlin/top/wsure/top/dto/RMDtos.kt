@@ -1,5 +1,9 @@
 package top.wsure.top.dto
 
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class Riven(
     val id: Long,
     val name: String,
@@ -9,14 +13,24 @@ data class Riven(
     val modulus: Double,
 )
 
+@Serializable
 enum class RivenType {
-    Archgun,
-    Melee,
-    Rifle,
-    Shotgun,
-    Pistol,
-    Zaw,
-    Kitgun,
-    Secondary,
-    Primary
+    @SerialName("Archgun")
+    ARCHGUN,
+    @SerialName("Melee")
+    MELEE,
+    @SerialName("Rifle")
+    RIFLE,
+    @SerialName("Shotgun")
+    SHOTGUN,
+    @SerialName("Pistol")
+    PISTOL,
+    @SerialName("Zaw")
+    ZAW,
+    @SerialName("Kitgun")
+    KITGUN,
+    @SerialName("Secondary")
+    SECONDARY,
+    @SerialName("Primary")
+    PRIMARY
 }
