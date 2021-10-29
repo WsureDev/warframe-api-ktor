@@ -12,4 +12,4 @@ data class Sale(
     val zh: String,
     val en: String,
     val thumb: String,
-)
+):Words

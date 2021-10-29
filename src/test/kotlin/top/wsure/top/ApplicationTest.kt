@@ -41,7 +41,7 @@ class ApplicationTest {
                 "    \"lib\": \"Dict\",\n" +
                 "    \"name\": \"Dict\"\n" +
                 "}")
-        println(t.lib.url)
+        println(t.lib.remoteUrl)
     }
 
     @Serializable

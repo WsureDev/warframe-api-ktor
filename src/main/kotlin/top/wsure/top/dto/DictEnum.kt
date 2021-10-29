@@ -2,31 +2,28 @@ package top.wsure.top.dto
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import top.wsure.top.Global
 import top.wsure.top.utils.getJsonObject
 
 @Serializable
-enum class DictEnum(val url:String) {
+enum class DictEnum(val remoteUrl:String,val localUrl:String,val customUrl:String) {
     @SerialName("Dict")
-    DICT("https://raw.githubusercontent.com/Richasy/WFA_Lexicon/WFA5/WF_Dict.json"),
+    DICT("${Global.WFA_LEXICON}WF_Dict.json","static/dicts/Dict.json","dicts/Dict.json"),
 
     @SerialName("Invasion")
-    INVASION("https://raw.githubusercontent.com/Richasy/WFA_Lexicon/WFA5/WF_Invasion.json"),
-
-    @SerialName("Lib")
-    LIB("https://raw.githubusercontent.com/Richasy/WFA_Lexicon/WFA5/WF_Lib.json"),
+    INVASION("${Global.WFA_LEXICON}WF_Invasion.json","static/dicts/Invasion.json","dicts/Invasion.json"),
 
     @SerialName("NightWave")
-    NIGHT_WAVE("https://raw.githubusercontent.com/Richasy/WFA_Lexicon/WFA5/WF_NightWave.json"),
+    NIGHT_WAVE("${Global.WFA_LEXICON}WF_NightWave.json","static/dicts/NightWave.json","dicts/NightWave.json"),
+
+    @SerialName("Lib")
+    LIB("${Global.WFA_LEXICON}WF_Lib.json","static/dicts/Lib.json","dicts/Lib.json"),
 
     @SerialName("Sale")
-    SALE("https://raw.githubusercontent.com/Richasy/WFA_Lexicon/WFA5/WF_Sale.json"),
+    SALE("${Global.WFA_LEXICON}WF_Sale.json","static/dicts/Sale.json","dicts/Sale.json"),
 
     @SerialName("Riven")
-    RIVEN("https://raw.githubusercontent.com/Richasy/WFA_Lexicon/WFA5/WF_Riven.json"),
+    RIVEN("${Global.WFA_LEXICON}WF_Riven.json","static/dicts/Riven.json","dicts/Riven.json"),
 
     ;
-
-    suspend fun <T> downloadDict():List<T>{
-        return this.url.getJsonObject()?: emptyList()
-    }
 }
