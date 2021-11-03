@@ -1,10 +1,10 @@
 package top.wsure.top.plugins
 
-import io.ktor.sessions.*
 import io.ktor.application.*
 import io.ktor.response.*
-import io.ktor.request.*
 import io.ktor.routing.*
+import io.ktor.sessions.*
+import kotlin.collections.set
 
 fun Application.configureSecurity() {
     data class MySession(val count: Int = 0)

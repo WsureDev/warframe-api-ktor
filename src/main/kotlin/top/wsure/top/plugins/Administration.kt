@@ -1,9 +1,7 @@
 package top.wsure.top.plugins
 
-import io.ktor.server.engine.*
 import io.ktor.application.*
-import io.ktor.response.*
-import io.ktor.request.*
+import io.ktor.server.engine.*
 
 fun Application.configureAdministration() {
     install(ShutDownUrl.ApplicationCallFeature) {

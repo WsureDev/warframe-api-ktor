@@ -3,27 +3,35 @@ package top.wsure.top.dto
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import top.wsure.top.Global
-import top.wsure.top.utils.getJsonObject
 
 @Serializable
-enum class DictEnum(val remoteUrl:String,val localUrl:String,val customUrl:String) {
+enum class DictEnum(val fileName:String) {
     @SerialName("Dict")
-    DICT("${Global.WFA_LEXICON}WF_Dict.json","static/dicts/Dict.json","dicts/Dict.json"),
+    DICT("Dict.json"),
 
     @SerialName("Invasion")
-    INVASION("${Global.WFA_LEXICON}WF_Invasion.json","static/dicts/Invasion.json","dicts/Invasion.json"),
+    INVASION("Invasion.json"),
 
     @SerialName("NightWave")
-    NIGHT_WAVE("${Global.WFA_LEXICON}WF_NightWave.json","static/dicts/NightWave.json","dicts/NightWave.json"),
+    NIGHT_WAVE("NightWave.json"),
 
     @SerialName("Lib")
-    LIB("${Global.WFA_LEXICON}WF_Lib.json","static/dicts/Lib.json","dicts/Lib.json"),
+    LIB("Lib.json"),
 
     @SerialName("Sale")
-    SALE("${Global.WFA_LEXICON}WF_Sale.json","static/dicts/Sale.json","dicts/Sale.json"),
+    SALE("Sale.json"),
 
     @SerialName("Riven")
-    RIVEN("${Global.WFA_LEXICON}WF_Riven.json","static/dicts/Riven.json","dicts/Riven.json"),
+    RIVEN("Riven.json"),
 
     ;
+    fun remoteUrl():String{
+        return "${Global.WFA_LEXICON}WF_${this.fileName}"
+    }
+    fun localUrl():String{
+        return "${Global.RESOURCE_LEXICON}WF_${this.fileName}"
+    }
+    fun customUrl():String{
+        return "${Global.CUSTOMER_LEXICON}WF_${this.fileName}"
+    }
 }

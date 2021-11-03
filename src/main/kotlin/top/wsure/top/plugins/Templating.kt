@@ -1,13 +1,12 @@
 package top.wsure.top.plugins
 
-import io.ktor.html.*
-import kotlinx.html.*
-import kotlinx.css.*
-import io.ktor.http.*
 import io.ktor.application.*
+import io.ktor.html.*
+import io.ktor.http.*
 import io.ktor.response.*
-import io.ktor.request.*
 import io.ktor.routing.*
+import kotlinx.css.*
+import kotlinx.html.*
 
 fun Application.configureTemplating() {
 

@@ -1,19 +1,16 @@
 package top.wsure.top.plugins
 
-import io.ktor.routing.*
-import io.ktor.http.*
-import io.ktor.content.*
-import io.ktor.http.content.*
-import io.ktor.features.*
 import io.ktor.application.*
-import io.ktor.response.*
+import io.ktor.features.*
+import io.ktor.http.content.*
 import io.ktor.request.*
+import io.ktor.response.*
+import io.ktor.routing.*
 
 fun Application.configureRouting() {
 
     install(AutoHeadResponse)
     install(DoubleReceive)
-    val fileContent = this::class.java.classLoader.getResource("static/dicts/base/Dict.json")?.readText()
 
     routing {
         get("/") {
