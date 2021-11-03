@@ -8,7 +8,7 @@ import java.io.File
 object FileUtils {
     val logger: Logger = LoggerFactory.getLogger(javaClass)
     inline fun <reified T> String.readResourceJson(): T? {
-        return kotlin.runCatching { this::class.java.classLoader.getResource(this)?.readText()?.jsonToObject<T>() }
+        return kotlin.runCatching { FileUtils::class.java.classLoader.getResource(this)?.readText()?.jsonToObject<T>() }
             .onFailure {
                 logger.warn("Read resource file {} by classloader failure !!", this, it)
             }.getOrNull()

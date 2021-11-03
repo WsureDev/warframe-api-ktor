@@ -29,9 +29,9 @@ enum class DictEnum(val fileName:String) {
         return "${Global.WFA_LEXICON}WF_${this.fileName}"
     }
     fun localUrl():String{
-        return "${Global.RESOURCE_LEXICON}WF_${this.fileName}"
+        return Global.RESOURCE_LEXICON + this.fileName
     }
     fun customUrl():String{
-        return "${Global.CUSTOMER_LEXICON}WF_${this.fileName}"
+        return Global.CUSTOMER_LEXICON + this.fileName
     }
 }
