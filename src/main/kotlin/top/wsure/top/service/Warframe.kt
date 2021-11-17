@@ -15,4 +15,8 @@ suspend fun initDictFollow(){
     val saleList = downloadSale()
     val rivenList = downloadRiven()
     //todo transform to dictionary and catching in memory
+
+    //init RivenWeapon data
+
+
 }

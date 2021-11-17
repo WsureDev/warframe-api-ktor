@@ -11,7 +11,7 @@ data class Dict(
 
     val en:String,
 
-):Words
+)
 
 @Serializable
 data class LibItem(
@@ -20,7 +20,7 @@ data class LibItem(
     val type:LibType,
     val uniqueName:String,
     val thumb:String,
-):Words
+)
 
 @Serializable
 enum class LibType {
