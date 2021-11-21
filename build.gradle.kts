@@ -1,7 +1,8 @@
 val ktor_version: String by project
 val kotlin_version: String by project
 val logback_version: String by project
-
+val brotliVersion = "1.6.0"
+val operatingSystem: OperatingSystem = org.gradle.nativeplatform.platform.internal.DefaultNativePlatform.getCurrentOperatingSystem()
 plugins {
     application
     kotlin("jvm") version "1.5.31"
@@ -32,6 +33,27 @@ dependencies {
     implementation("io.ktor:ktor-client-core:$ktor_version")
     implementation("io.ktor:ktor-client-cio:$ktor_version")
     implementation("io.ktor:ktor-client-serialization:$ktor_version")
+    implementation("io.ktor:ktor-client-okhttp:$ktor_version")
+
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.6.0")
+    // https://mvnrepository.com/artifact/com.nixxcode.jvmbrotli/jvmbrotli
+    implementation("com.aayushatharva.brotli4j:brotli4j:$brotliVersion")
+    implementation(
+        "com.aayushatharva.brotli4j:native-${
+            if (operatingSystem.isWindows) "windows-x86_64"
+            else if (operatingSystem.isMacOsX) "osx-x86_64"
+            else if (operatingSystem.isLinux)
+                if (org.gradle.nativeplatform.platform.internal.DefaultNativePlatform.getCurrentArchitecture().isArm) "linux-aarch64"
+                else "native-linux-x86_64"
+            else ""
+        }:$brotliVersion"
+    )
+
+
+
+
+    implementation("com.dropbox.mobile.store:store4:4.0.2-KT15")
+
     implementation("io.github.reactivecircus.cache4k:cache4k:0.3.0")
     testImplementation("io.ktor:ktor-server-tests:$ktor_version")
     testImplementation("org.jetbrains.kotlin:kotlin-test:$kotlin_version")
