@@ -9,7 +9,7 @@ data class Dict(
 
     val zh:String,
 
-    val en:String,
+    var en:String,
 
 )
 

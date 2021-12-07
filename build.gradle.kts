@@ -7,6 +7,7 @@ plugins {
     application
     kotlin("jvm") version "1.5.31"
     id("org.jetbrains.kotlin.plugin.serialization") version "1.5.31"
+    id("com.github.johnrengelman.shadow") version "7.0.0"
 }
 
 group = "top.wsure.top"
@@ -49,12 +50,22 @@ dependencies {
         }:$brotliVersion"
     )
 
-
-
+    implementation("com.github.kittinunf.result:result-jvm:5.2.0")
+    implementation("com.github.kittinunf.fuse:fuse:1.2.1")
+    implementation("com.esotericsoftware:kryo:5.2.0")
 
     implementation("com.dropbox.mobile.store:store4:4.0.2-KT15")
 
     implementation("io.github.reactivecircus.cache4k:cache4k:0.3.0")
+    implementation("org.ehcache:ehcache:3.9.7")
+
     testImplementation("io.ktor:ktor-server-tests:$ktor_version")
     testImplementation("org.jetbrains.kotlin:kotlin-test:$kotlin_version")
+}
+tasks{
+    shadowJar {
+        manifest {
+            attributes(Pair("Main-Class", "top.wsure.top.Application"))
+        }
+    }
 }

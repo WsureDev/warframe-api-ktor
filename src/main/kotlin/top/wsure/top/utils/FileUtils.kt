@@ -3,7 +3,8 @@ package top.wsure.top.utils
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import top.wsure.top.utils.JsonUtils.jsonToObject
-import java.io.File
+import java.io.*
+import java.util.*
 
 object FileUtils {
     val logger: Logger = LoggerFactory.getLogger(javaClass)
@@ -19,5 +20,18 @@ object FileUtils {
             .onFailure {
                 logger.warn("Read file {} by File method failure !!", this, it)
             }.getOrNull()
+    }
+
+    fun createFileAndDirectory(file:File,isDir:Boolean){
+        if(isDir) file.mkdirs()
+        else if(file.parentFile.exists() || file.parentFile.mkdirs()){
+            file.createNewFile()
+        }
+    }
+
+    fun File.copyInputStreamToFile(inputStream: InputStream) {
+        this.outputStream().use { fileOut ->
+            inputStream.copyTo(fileOut)
+        }
     }
 }

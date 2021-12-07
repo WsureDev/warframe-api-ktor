@@ -4,28 +4,38 @@ import com.aayushatharva.brotli4j.Brotli4jLoader
 import com.aayushatharva.brotli4j.decoder.BrotliInputStream
 import io.ktor.http.*
 import io.ktor.server.testing.*
+import io.ktor.util.*
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.runBlocking
-import kotlinx.css.Contain
 import kotlinx.serialization.Serializable
 import okio.ByteString.Companion.decodeHex
 import okio.ByteString.Companion.toByteString
+import org.ehcache.Cache
+import org.ehcache.PersistentCacheManager
+import org.ehcache.config.builders.CacheManagerBuilder
+import org.ehcache.config.builders.ResourcePoolsBuilder
+import org.ehcache.config.units.EntryUnit
+import org.ehcache.config.units.MemoryUnit
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import top.wsure.top.dto.Dict
 import top.wsure.top.dto.DictEnum
 import top.wsure.top.plugins.configureMonitoring
 import top.wsure.top.plugins.configureRouting
-import top.wsure.top.utils.BiliLiveUtils
+import top.wsure.top.utils.*
 import top.wsure.top.utils.DictUtils.downloadDict
 import top.wsure.top.utils.DictUtils.downloadRiven
 import top.wsure.top.utils.JsonUtils.jsonToObject
 import top.wsure.top.utils.JsonUtils.objectToJson
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
+import java.io.File
 import java.nio.file.Paths
 import java.util.zip.InflaterOutputStream
+import kotlin.io.path.Path
 import kotlin.test.Test
 import kotlin.test.assertEquals
+
 
 class ApplicationTest {
     private val logger: Logger = LoggerFactory.getLogger(javaClass)
@@ -178,5 +188,33 @@ class ApplicationTest {
 
     fun ByteArray.write(value:Int,offset: Int = 0){
         this[offset] = value.toByte()
+    }
+
+
+    @OptIn(InternalAPI::class)
+    @Test
+    fun testStore2(){
+        val persistentCacheManager: PersistentCacheManager = CacheManagerBuilder.newCacheManagerBuilder()
+            .with(CacheManagerBuilder.persistence(File( Path("").toAbsolutePath().toString(), "myData")))
+            .withCache("threeTieredCache12", cacheConfigBuilder<String,MutableMap<String, Dict>>(
+                        ResourcePoolsBuilder.newResourcePoolsBuilder()
+                            .heap(10, EntryUnit.ENTRIES)
+                            .offheap(1, MemoryUnit.MB)
+                            .disk(20, MemoryUnit.MB, true)
+                    )
+//                .withValueSerializer()
+//            .withKotlinValueSerializer()
+                .withValueSerializer(kotlinxSerializer())
+            )
+            .build(true)
+
+        val threeTieredCache: Cache<String,MutableMap<String,Dict>> = persistentCacheManager.getCache("threeTieredCache12")
+//        threeTieredCache.put("adasd", mutableMapOf("stillAvailableAfterRestart" to Dict(1L,"asda","asdsad")))
+        threeTieredCache.get("adasd").get("stillAvailableAfterRestart")?.en = "111111111111111111111111"
+        println(
+            threeTieredCache.get("adasd").get("stillAvailableAfterRestart")
+        )
+//        persistentCacheManager.close()
+
     }
 }
